@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ArticleClient, CategoryClient } from './shared/API';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { APIService } from './shared/api.service';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [ArticleClient, CategoryClient],
+  providers: [ArticleClient, CategoryClient, HttpClient, APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
