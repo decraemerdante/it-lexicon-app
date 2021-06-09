@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --pink: #ff0044;
+  --white: #ededed;
+  --purple: #250044;
+}
+body {
+  font-family: Roboto, "Helvetica Neue", "DejaVu Sans", Arial, sans-serif;
+  background-color: #ededed;
+}
+
+.card {
+  box-shadow: 0 0 3px rgb(0 0 0 / 38%);
+  border-radius: 2px;
+  padding: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  background: #fff;
+  min-height: 150px;
+}
+
+.row {
+  margin-top: 1rem;
+}
+
+.btn-category {
+  padding: 0 8px;
+  min-height: 24px;
+  min-width: 24px;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, 0.07);
+  margin-right: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  text-align: center;
+}
+
+.btn-article {
+  padding: 0 8px;
+  min-height: 36px;
+  min-width: 36px;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, 0.07);
+  margin-right: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  text-align: center;
+}
+
+.btn-category:hover {
+  background: var(--purple) !important;
+  color: var(--white) !important;
+}
+.active {
+  background: var(--pink) !important;
+  color: var(--white) !important;
+}
+
+.btn-primary {
+  background-color: var(--pink);
+  color: var(--white);
+  border-color: var(--pink);
+}
+
+.btn-primary:hover {
+  background-color: var(--purple);
+  color: var(--white);
+  border-color: var(--purple);
+}

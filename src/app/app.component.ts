@@ -11,12 +11,12 @@ import { APIService } from './shared/api.service';
 export class AppComponent implements OnInit {
   title = 'it-lexicon-app';
   
-  articles: ArticleDto[]
-  constructor(private service: APIService){
+ 
+  constructor(){
     
   }
 
   ngOnInit(): void {
-    this.service.categoryClient.getAll().subscribe(data => console.log(data));
+    
   }
 }
