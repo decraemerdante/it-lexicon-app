@@ -1,14 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 :root {
   --pink: #ff0044;
   --white: #ededed;
   --purple: #250044;
 }
+
 body {
   font-family: Roboto, "Helvetica Neue", "DejaVu Sans", Arial, sans-serif;
   background-color: #ededed;
 }
 
+.action-icon {
+  color: var(--pink) !important;
+}
+
+.action-icon:hover {
+  cursor: pointer;
+  color: var(--purple) !important;
+}
+a.color-pink:hover {
+  color: var(--purple) !important;
+}
 .card {
   box-shadow: 0 0 3px rgb(0 0 0 / 38%);
   border-radius: 2px;
@@ -17,6 +31,13 @@ body {
   position: relative;
   background: #fff;
   min-height: 150px;
+}
+.pull-right {
+  float: right;
+}
+
+.color-pink {
+  color: var(--pink);
 }
 
 .row {

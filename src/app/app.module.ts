@@ -11,12 +11,15 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CategoryAddComponent } from './category/category-add/category-add.component';
+import { CategoryListComponent } from './category/category-list/category-list.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesListComponent,  
-    LoadingComponent
+    LoadingComponent,CategoryAddComponent, CategoryListComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +27,10 @@ import { FormsModule } from '@angular/forms';
     NgxSpinnerModule ,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      {path: "home", component: AppComponent},
-      {path: "home/:searchTerm", component: AppComponent},
-      {path: "", component: AppComponent}
+      {path: "category/add", component: CategoryAddComponent},
+      {path: "category", component: CategoryListComponent},
+      {path: "home", redirectTo: ''},      
+      {path: "", component: ArticlesListComponent}
     ]),
     FormsModule
   ],

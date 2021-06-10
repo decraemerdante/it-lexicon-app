@@ -42,13 +42,15 @@ export class ArticlesListComponent implements OnInit {
   }
   filterArticlesByCategory(id: string) {
     this.spinner.show();
-    this.api.categoryClient.get(id).subscribe((data: CategoryDto) => {
-      this.allArticles = data.articles;
-      let articlesFiltered = this.filterArticles();
-      this.articles = articlesFiltered;
-      
-      this.spinner.hide()
-    })
+    this.api.articleClient.getByCategory(id).subscribe(
+      (data: ArticleDto[]) => {
+        this.allArticles = data;
+        let articlesFiltered = this.filterArticles();
+        this.articles = articlesFiltered;
+        
+        this.spinner.hide()
+      }
+    )   
   }
   filterArticles() {
     
@@ -70,18 +72,14 @@ export class ArticlesListComponent implements OnInit {
     this.spinner.show();
     this.api.categoryClient.getAll().subscribe((data: CategoryDto[]) =>{
       this.categories = data;
-      let selectedArticles = [];
-      this.categories.forEach(category => {
-        category.articles.forEach(article => {
-          selectedArticles.push(article);
-        });        
-      });
-
-      this.allArticles = selectedArticles;
-      let articlesFiltered = this.filterArticles();
+      
+      this.api.articleClient.getAll().subscribe(articles => {
+        this.allArticles = articles;
+        let articlesFiltered = this.filterArticles();
+        this.articles = articlesFiltered;
+        this.spinner.hide()
+      });  
      
-      this.articles = articlesFiltered;
-      this.spinner.hide()
     }
   );
 }

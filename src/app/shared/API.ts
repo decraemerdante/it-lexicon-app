@@ -22,7 +22,7 @@ export class ArticleClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44388";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
     }
 
     add(article: ArticleDto): Observable<FileResponse | null> {
@@ -331,7 +331,7 @@ export class CategoryClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44388";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
     }
 
     add(name: string): Observable<FileResponse | null> {
