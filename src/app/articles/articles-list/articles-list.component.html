@@ -7,13 +7,13 @@
             <div class="col-12">
                 <div class="col-12">
                     <h4>Categories    
-                    <a [routerLink]="['category']">
+                    <a [routerLink]="['/category']">
                         <span class="bi  bi-arrow-right-circle action-icon"></span>
                     </a>
                 </h4>
                     
                 </div>
-                <button class="btn btn-category active" (click)="handleCatClick($event)" id="all">All</button>
+                <button class="btn btn-category selected-category" (click)="handleCatClick($event)" id="all">All</button>
                 <button *ngFor="let category of categories" class="btn btn-category" [id]="category.maskId"(click)="handleCatClick($event)">{{category.name}}</button>
                 <hr>
             </div>
@@ -31,13 +31,13 @@
                 </form>
             </div>
             <div class="col-12 mt-3">
-                <a class="color-pink pull-right"><span class="bi bi-plus-lg action-icon me-2"></span> Add new article</a>
+                <a class="color-pink pull-right" [routerLink]="['/article/add']"><span class="bi bi-plus-lg action-icon me-2"></span> Add new article</a>
             </div>
             <div class="col-12 mt-3" *ngIf="articles && articles.length > 0">
                 <table class="table table-responsive table-striped">
                    <tbody>
                        <tr *ngFor="let article of articles">
-                           <td>{{article.title}}</td>
+                           <td><a [routerLink]="['/article', article.maskId]">{{article.title}}</a></td>
                            <td class="article-actions">
                             <span class="bi bi-trash-fill action-icon pull-right ms-4"></span>
                                <span class="bi bi-pencil-fill action-icon pull-right"></span>                               

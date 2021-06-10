@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ArticleDto, CategoryDto } from '../shared/API';
-import { APIService } from '../shared/api.service';
+import { ArticleDto, CategoryDto } from '../../shared/API';
+import { APIService } from '../../shared/api.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -25,12 +25,12 @@ export class ArticlesListComponent implements OnInit {
       this.articles = [];
       let id = event.target.id;
 
-      let activeBtn = document.getElementsByClassName("active");
+      let activeBtn = document.getElementsByClassName("selected-category");
 
       while(activeBtn.length > 0){
-        activeBtn[0].classList.remove('active');
+        activeBtn[0].classList.remove('selected-category');
       }
-      event.target.classList.toggle("active");
+      event.target.classList.toggle("selected-category");
 
     if(id === "all"){
       this.getCategories();

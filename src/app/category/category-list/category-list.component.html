@@ -14,7 +14,9 @@
                         <td>{{category.name}}</td>
                         <td class="article-actions">
                             <span class="bi bi-trash-fill action-icon pull-right ms-4" (click)="deleteCategory(category.maskId)"></span>
-                            <span class="bi bi-pencil-fill action-icon pull-right"></span>                               
+                            <a [routerLink]="category.maskId">
+                                <span class="bi bi-pencil-fill action-icon pull-right" ></span>
+                            </a>                               
                         </td>
                     </tr>
                 </tbody>

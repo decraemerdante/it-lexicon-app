@@ -80,6 +80,11 @@ a.color-pink:hover {
   background: var(--purple) !important;
   color: var(--white) !important;
 }
+.selected-category {
+  background: var(--pink) !important;
+  color: var(--white) !important;
+}
+
 .active {
   background: var(--pink) !important;
   color: var(--white) !important;

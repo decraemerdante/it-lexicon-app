@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ArticleClient, CategoryClient } from './shared/API';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { APIService } from './shared/api.service';
-import { ArticlesListComponent } from './articles-list/articles-list.component';
+import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 
 import { LoadingComponent } from './shared/loading/loading.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -13,24 +13,32 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CategoryAddComponent } from './category/category-add/category-add.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
+import { CategoryEditComponent } from './category/category-edit/category-edit.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ArticleAddComponent } from './articles/article-add/article-add.component';
+import { ArticleReadComponent } from './articles/article-read/article-read.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesListComponent,  
-    LoadingComponent,CategoryAddComponent, CategoryListComponent
+    LoadingComponent,CategoryAddComponent, CategoryListComponent, CategoryEditComponent, NavbarComponent, ArticleAddComponent, ArticleReadComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgxSpinnerModule ,
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      {path: "category/add", component: CategoryAddComponent},
+    RouterModule.forRoot([      
+      {path: "category/add", component: CategoryAddComponent},   
       {path: "category", component: CategoryListComponent},
-      {path: "home", redirectTo: ''},      
-      {path: "", component: ArticlesListComponent}
+      {path: "category/:id", component: CategoryEditComponent},
+      {path:"article/add", component:ArticleAddComponent},
+      {path:"article/:id", component:ArticleReadComponent},
+      {path: "", redirectTo: "/articles", pathMatch: 'full'},
+      {path: "articles", component: ArticlesListComponent},      
+    
     ]),
     FormsModule
   ],
