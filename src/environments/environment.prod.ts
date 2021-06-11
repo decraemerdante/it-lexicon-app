@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://localhost:44388"
+  apiUrl: "https://it-lexicon-api.azurewebsites.net"
 };

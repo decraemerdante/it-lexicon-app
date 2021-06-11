@@ -1,7 +1,13 @@
 <div class="card">
     <app-loading></app-loading>
     <div *ngIf="article">
-        <h3>{{article.title}}</h3>
+        <h3>{{article.title}}  <span>
+            <a [routerLink]="['/article/edit', article.maskId]">
+                <span class="bi  bi-pencil action-icon"></span>
+            </a>
+        </span>  
+    </h3>           
+           
         <div class="col-12 mt-3" [innerHtml]="article.content">            
         </div>
     </div>    

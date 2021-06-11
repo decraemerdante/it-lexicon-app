@@ -2,7 +2,7 @@
 
 <div class="card">
     <app-loading></app-loading>
-    <div *ngIf="categories && categories.length > 0">
+    <div>
         <div class="row">
             <div class="col-12">
                 <div class="col-12">
@@ -14,12 +14,16 @@
                     
                 </div>
                 <button class="btn btn-category selected-category" (click)="handleCatClick($event)" id="all">All</button>
-                <button *ngFor="let category of categories" class="btn btn-category" [id]="category.maskId"(click)="handleCatClick($event)">{{category.name}}</button>
+                <span *ngIf="categories && categories.length > 0">
+                    <button  *ngFor="let category of categories" class="btn btn-category" [id]="category.maskId"(click)="handleCatClick($event)">{{category.name}}</button>
+                </span>               
                 <hr>
+            </div>
+            </div>
             </div>
             <div class="col-12">
                 <h4>Search</h4>
-                <form #searchForm="ngForm" (ngSubmit)="search(searchForm.value, $event)">
+                <form #searchForm="ngForm" (ngSubmit)="search(searchForm.value)">
                     <div class="row">
                         <div class="col-md-4 col-xs-12">
                             <input type="text" name="searchTerm" id="searchTerm" class="form-control " (ngModel)="searchTerm" [value]="searchTerm" />
@@ -39,13 +43,13 @@
                        <tr *ngFor="let article of articles">
                            <td><a [routerLink]="['/article', article.maskId]">{{article.title}}</a></td>
                            <td class="article-actions">
-                            <span class="bi bi-trash-fill action-icon pull-right ms-4"></span>
-                               <span class="bi bi-pencil-fill action-icon pull-right"></span>                               
+                              <a (click)="deleteArticle($event)" [id]="article.maskId"> <span class="bi bi-trash-fill action-icon pull-right ms-4" [id]="article.maskId"></span></a> 
+                               <a [routerLink]="['/article/edit', article.maskId]"><span class="bi bi-pencil-fill action-icon pull-right"></span></a>                               
                         </td>
                        </tr>
                    </tbody>
                 </table>
             </div>
         </div>
-    </div>
-</div>
+    
+

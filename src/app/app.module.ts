@@ -35,6 +35,7 @@ import { ArticleReadComponent } from './articles/article-read/article-read.compo
       {path: "category", component: CategoryListComponent},
       {path: "category/:id", component: CategoryEditComponent},
       {path:"article/add", component:ArticleAddComponent},
+      {path:"article/edit/:id", component:ArticleAddComponent},
       {path:"article/:id", component:ArticleReadComponent},
       {path: "", redirectTo: "/articles", pathMatch: 'full'},
       {path: "articles", component: ArticlesListComponent},      

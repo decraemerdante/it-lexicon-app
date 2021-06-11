@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { ArticleDto, CategoryDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
@@ -11,24 +11,47 @@ import { APIService } from 'src/app/shared/api.service';
 })
 export class ArticleAddComponent implements OnInit {
   article: ArticleDto; 
+  id:string;
   categories: CategoryDto[];
-  constructor(private api: APIService, private router : Router,private spinner: NgxSpinnerService) { }
+  constructor(private api: APIService, private router : Router,private spinner: NgxSpinnerService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {  
-    this.spinner.show();
+  ngOnInit(): void { 
+    this.article = {} as ArticleDto;
+  this.spinner.show();
+
+   this.id = this.route.snapshot.params['id'];   
+
     this.api.categoryClient.getAll().subscribe(categories => {
       this.categories = categories;
-      this.spinner.hide();      
+      if(this.id){
+        this.getArticle(this.id);
+      }
+      else{
+        this.spinner.hide(); 
+      }           
     })
+  }
+  getArticle(id: string) {
+    this.api.articleClient.get(id).subscribe(data => {
+      this.article = data;
+      this.spinner.hide();
+    });
   }
 
   addArticle(data: ArticleDto){
+   
       this.spinner.show();
-      this.api.articleClient.add(data).subscribe(response => {
-        this.spinner.hide();
-        
-        this.router.navigateByUrl("/article/" + response);
-      })
+      if(this.id){
+        console.log(this.article);
+      }
+      else{
+        this.api.articleClient.add(data).subscribe(response => {
+          this.spinner.hide();
+          
+          this.router.navigateByUrl("/article/" + response);
+        })
+      }
+     
   }
 
 }
