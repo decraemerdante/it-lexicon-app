@@ -1,55 +1,85 @@
-
-
 <div class="card">
-    <app-loading></app-loading>
-    <div>
-        <div class="row">
-            <div class="col-12">
-                <div class="col-12">
-                    <h4>Categories    
-                    <a [routerLink]="['/category']">
-                        <span class="bi  bi-arrow-right-circle action-icon"></span>
-                    </a>
-                </h4>
-                    
-                </div>
-                <button class="btn btn-category selected-category" (click)="handleCatClick($event)" id="all">All</button>
-                <span *ngIf="categories && categories.length > 0">
-                    <button  *ngFor="let category of categories" class="btn btn-category" [id]="category.maskId"(click)="handleCatClick($event)">{{category.name}}</button>
-                </span>               
-                <hr>
-            </div>
-            </div>
-            </div>
-            <div class="col-12">
-                <h4>Search</h4>
-                <form #searchForm="ngForm" (ngSubmit)="search(searchForm.value)">
-                    <div class="row">
-                        <div class="col-md-4 col-xs-12">
-                            <input type="text" name="searchTerm" id="searchTerm" class="form-control " (ngModel)="searchTerm" [value]="searchTerm" />
-                        </div> 
-                        <div class="col-md-2 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
-                            <button type="submit" class="btn btn-primary w-100">Search</button>
-                        </div>        
-                    </div>            
-                </form>
-            </div>
-            <div class="col-12 mt-3">
-                <a class="color-pink pull-right" [routerLink]="['/article/add']"><span class="bi bi-plus-lg action-icon me-2"></span> Add new article</a>
-            </div>
-            <div class="col-12 mt-3" *ngIf="articles && articles.length > 0">
-                <table class="table table-responsive table-striped">
-                   <tbody>
-                       <tr *ngFor="let article of articles">
-                           <td><a [routerLink]="['/article', article.maskId]">{{article.title}}</a></td>
-                           <td class="article-actions">
-                              <a (click)="deleteArticle($event)" [id]="article.maskId"> <span class="bi bi-trash-fill action-icon pull-right ms-4" [id]="article.maskId"></span></a> 
-                               <a [routerLink]="['/article/edit', article.maskId]"><span class="bi bi-pencil-fill action-icon pull-right"></span></a>                               
-                        </td>
-                       </tr>
-                   </tbody>
-                </table>
-            </div>
+  <app-loading></app-loading>
+  <div>
+    <div class="row">
+      <div class="col-12">
+        <div class="col-12">
+          <h4>
+            Categories
+            <a [routerLink]="['/category']">
+              <span class="bi bi-arrow-right-circle action-icon"></span>
+            </a>
+          </h4>
         </div>
-    
+        <button
+          class="btn btn-category selected-category"
+          (click)="handleCatClick($event)"
+          id="all"
+        >
+          All
+        </button>
+        <span *ngIf="categories && categories.length > 0">
+          <button
+            *ngFor="let category of categories"
+            class="btn btn-category"
+            [id]="category.maskId"
+            (click)="handleCatClick($event)"
+          >
+            {{ category.name }}
+          </button>
+        </span>
+        <hr />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <h4>Search</h4>
+    <form #searchForm="ngForm" (ngSubmit)="search(searchForm.value)">
+      <div class="row">
+        <div class="col-md-4 col-xs-12">
+          <input
+            type="text"
+            name="searchTerm"
+            id="searchTerm"
+            class="form-control"
+            (ngModel)="(searchTerm)"
+            [value]="searchTerm"
+          />
+        </div>
+        <div class="col-md-2 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
+          <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-12 mt-3">
+    <a class="color-pink pull-right" [routerLink]="['/article/add']"
+      ><span class="bi bi-plus-lg action-icon me-2"></span> Add new article</a
+    >
+  </div>
 
+  <div class="col-12 mt-3" *ngIf="articles && articles.length > 0">
+    <table class="table table-responsive table-striped">
+      <tbody>
+        <tr *ngFor="let article of articles">
+          <td>
+            <a [routerLink]="['/article', article.maskId]">{{
+              article.title
+            }}</a>
+          </td>
+          <td class="article-actions">
+            <a (click)="deleteArticle($event)" [id]="article.maskId">
+              <span
+                class="bi bi-trash-fill action-icon pull-right ms-4"
+                [id]="article.maskId"
+              ></span
+            ></a>
+            <a [routerLink]="['/article/edit', article.maskId]"
+              ><span class="bi bi-pencil-fill action-icon pull-right"></span
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

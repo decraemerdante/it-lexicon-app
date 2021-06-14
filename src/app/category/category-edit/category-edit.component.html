@@ -1,21 +1,31 @@
 <div class="card col-md-6 col-sm-12">
-    <div class="row">
-        <div class="col-sm-12">
-            <app-loading></app-loading>
-            <h4>Edit</h4>
-            <form *ngIf="category" #editCategoryForm="ngForm" (ngSubmit)="editCategory(editCategoryForm.value)">
-                
-                <div class="row">
-               <label>Name</label>
-                <div class="col-md-9 col-sm-12">
-                    <input type="text" [(ngModel)]="category.name" name="name" id="name" class="form-control" placeholder="Name" [value]="category.name"/>
-                </div>
-                <div class="col-md-3 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
-                </div>
-            </div>
-            </form>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-loading></app-loading>
+      <h4>Edit</h4>
+      <form
+        *ngIf="category"
+        #editCategoryForm="ngForm"
+        (ngSubmit)="editCategory(editCategoryForm.value)"
+      >
+        <div class="row">
+          <label>Name</label>
+          <div class="col-md-9 col-sm-12">
+            <input
+              type="text"
+              [(ngModel)]="category.name"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="Name"
+              [value]="category.name"
+            />
+          </div>
+          <div class="col-md-3 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>
-

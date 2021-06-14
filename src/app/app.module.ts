@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ArticleClient, CategoryClient } from './shared/API';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHandler,
+} from '@angular/common/http';
 import { APIService } from './shared/api.service';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 
@@ -17,35 +21,34 @@ import { CategoryEditComponent } from './category/category-edit/category-edit.co
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ArticleAddComponent } from './articles/article-add/article-add.component';
 import { ArticleReadComponent } from './articles/article-read/article-read.component';
-import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
-
+import {
+  AngularEditorComponent,
+  AngularEditorModule,
+} from '@kolkov/angular-editor';
+import { routes } from './routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArticlesListComponent,  
-    LoadingComponent,CategoryAddComponent, CategoryListComponent, CategoryEditComponent, NavbarComponent, ArticleAddComponent, ArticleReadComponent
+    ArticlesListComponent,
+    LoadingComponent,
+    CategoryAddComponent,
+    CategoryListComponent,
+    CategoryEditComponent,
+    NavbarComponent,
+    ArticleAddComponent,
+    ArticleReadComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgxSpinnerModule ,
+    NgxSpinnerModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([      
-      {path: "category/add", component: CategoryAddComponent},   
-      {path: "category", component: CategoryListComponent},
-      {path: "category/:id", component: CategoryEditComponent},
-      {path:"article/add", component:ArticleAddComponent},
-      {path:"article/edit/:id", component:ArticleAddComponent},
-      {path:"article/:id", component:ArticleReadComponent},
-      {path: "", component: ArticlesListComponent}
-         
-    
-    ]),
+    RouterModule.forRoot(routes),
     FormsModule,
-    AngularEditorModule
+    AngularEditorModule,
   ],
   providers: [ArticleClient, CategoryClient, HttpClient, APIService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

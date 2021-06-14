@@ -25,6 +25,7 @@ export class ArticleClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
     }
 
+    
     add(article: ArticleDto): Observable<string> {
         let url_ = this.baseUrl + "/api/Article";
         url_ = url_.replace(/[?&]$/, "");

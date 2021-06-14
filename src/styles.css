@@ -14,6 +14,9 @@ body {
 .action-icon {
   color: var(--pink) !important;
 }
+.angular-editor-textarea {
+  min-height: 200px !important;
+}
 
 .action-icon:hover {
   cursor: pointer;
