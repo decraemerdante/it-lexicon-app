@@ -98,6 +98,10 @@ a.color-pink:hover {
   border-color: var(--pink);
 }
 
+.nav-link {
+  color: var(--white) !important;
+}
+
 .btn-primary:hover {
   background-color: var(--purple);
   color: var(--white);

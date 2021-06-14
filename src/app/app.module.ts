@@ -26,6 +26,8 @@ import {
   AngularEditorModule,
 } from '@kolkov/angular-editor';
 import { routes } from './routes';
+import { ArticleDeleteComponent } from './articles/article-delete/article-delete.component';
+import { CategoryDeleteComponent } from './category/category-delete/category-delete.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { routes } from './routes';
     NavbarComponent,
     ArticleAddComponent,
     ArticleReadComponent,
+    ArticleDeleteComponent,
+    CategoryDeleteComponent,
   ],
   imports: [
     BrowserModule,

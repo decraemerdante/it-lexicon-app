@@ -16,10 +16,11 @@
           <tr *ngFor="let category of categories">
             <td>{{ category.name }}</td>
             <td class="article-actions">
-              <span
-                class="bi bi-trash-fill action-icon pull-right ms-4"
-                (click)="deleteCategory(category.maskId)"
-              ></span>
+              <a [routerLink]="['/category/delete', category.maskId]">
+                <span
+                  class="bi bi-trash-fill action-icon pull-right ms-4"
+                ></span
+              ></a>
               <a [routerLink]="category.maskId">
                 <span class="bi bi-pencil-fill action-icon pull-right"></span>
               </a>

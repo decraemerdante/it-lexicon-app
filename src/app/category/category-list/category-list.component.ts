@@ -17,14 +17,6 @@ export class CategoryListComponent implements OnInit {
     this.getCategories();
   }
 
-  deleteCategory(maskId) {
-    this.spinner.show();
-
-    this.api.categoryClient.delete(maskId).subscribe((response) => {
-      this.getCategories();
-    });
-  }
-
   getCategories() {
     this.api.categoryClient.getAll().subscribe((data: CategoryDto[]) => {
       this.categories = data;

@@ -68,7 +68,10 @@
             }}</a>
           </td>
           <td class="article-actions">
-            <a (click)="deleteArticle($event)" [id]="article.maskId">
+            <a
+              [routerLink]="['/article/delete', article.maskId]"
+              [id]="article.maskId"
+            >
               <span
                 class="bi bi-trash-fill action-icon pull-right ms-4"
                 [id]="article.maskId"

@@ -87,13 +87,4 @@ export class ArticlesListComponent implements OnInit {
     this.searchTerm = data.searchTerm;
     this.articles = this.filterArticles();
   }
-
-  deleteArticle(event) {
-    console.log(event);
-    this.spinner.show();
-    this.api.articleClient.delete(event.target.id).subscribe((response) => {
-      this.spinner.hide();
-      this.getCategories();
-    });
-  }
 }
