@@ -16,7 +16,7 @@ export class ArticleAddComponent implements OnInit {
   constructor(private api: APIService, private router : Router,private spinner: NgxSpinnerService, private route: ActivatedRoute) { }
 
   ngOnInit(): void { 
-    this.article = {} as ArticleDto;
+  this.article = {} as ArticleDto;
   this.spinner.show();
 
    this.id = this.route.snapshot.params['id'];   
@@ -42,10 +42,14 @@ export class ArticleAddComponent implements OnInit {
    
       this.spinner.show();
       if(this.id){
-        console.log(this.article);
+        this.api.articleClient.update(this.article).subscribe(response => {
+          this.spinner.hide();
+          
+          this.router.navigateByUrl("/article/" + this.id);
+        })
       }
       else{
-        this.api.articleClient.add(data).subscribe(response => {
+        this.api.articleClient.add(this.article).subscribe(response => {
           this.spinner.hide();
           
           this.router.navigateByUrl("/article/" + response);

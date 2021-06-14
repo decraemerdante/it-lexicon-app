@@ -17,6 +17,7 @@ import { CategoryEditComponent } from './category/category-edit/category-edit.co
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ArticleAddComponent } from './articles/article-add/article-add.component';
 import { ArticleReadComponent } from './articles/article-read/article-read.component';
+import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -37,11 +38,12 @@ import { ArticleReadComponent } from './articles/article-read/article-read.compo
       {path:"article/add", component:ArticleAddComponent},
       {path:"article/edit/:id", component:ArticleAddComponent},
       {path:"article/:id", component:ArticleReadComponent},
-      {path: "", redirectTo: "/articles", pathMatch: 'full'},
-      {path: "articles", component: ArticlesListComponent},      
+      {path: "", component: ArticlesListComponent}
+         
     
     ]),
-    FormsModule
+    FormsModule,
+    AngularEditorModule
   ],
   providers: [ArticleClient, CategoryClient, HttpClient, APIService],
   bootstrap: [AppComponent]

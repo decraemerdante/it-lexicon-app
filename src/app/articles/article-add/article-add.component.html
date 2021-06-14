@@ -24,7 +24,7 @@
                <div class="form-group mt-3">
                 <label>Content</label>
                 <div class="col-sm-12">
-                    <textarea name="content" [(ngModel)]="article.content" id="content" class="form-control"></textarea>
+                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="article.content"[ngModelOptions]="{standalone: true}"></angular-editor>                    
                 </div>
             </div>
                
