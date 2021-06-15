@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { timeStamp } from 'console';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoryDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';

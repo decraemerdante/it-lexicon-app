@@ -1,33 +1,27 @@
-<div class="card">
-  <app-loading></app-loading>
-  <div class="row">
-    <div class="col-12">
-      <h4>Categories</h4>
-    </div>
-    <div class="col-12 mt-3">
-      <a [routerLink]="['add']" class="color-pink pull-right"
-        ><span class="bi bi-plus-lg action-icon me-2"></span> Add new
-        category</a
-      >
-    </div>
-    <div *ngIf="categories && categories.length > 0" class="col-12 mt-3">
-      <table class="table table-responsive table-striped">
-        <tbody>
-          <tr *ngFor="let category of categories">
-            <td>{{ category.name }}</td>
-            <td class="article-actions">
-              <a [routerLink]="['/category/delete', category.maskId]">
-                <span
-                  class="bi bi-trash-fill action-icon pull-right ms-4"
-                ></span
-              ></a>
-              <a [routerLink]="category.maskId">
-                <span class="bi bi-pencil-fill action-icon pull-right"></span>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="row">
+  <div class="col-12">
+    <h4>Categories</h4>
+  </div>
+  <div class="col-12 mt-3">
+    <a [routerLink]="['add']" class="color-pink pull-right"
+      ><span class="bi bi-plus-lg action-icon me-2"></span> Add new category</a
+    >
+  </div>
+  <div *ngIf="categories && categories.length > 0" class="col-12 mt-3">
+    <table class="table table-responsive table-striped">
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.name }}</td>
+          <td class="article-actions">
+            <a [routerLink]="['/category/delete', category.maskId]">
+              <span class="bi bi-trash-fill action-icon pull-right ms-4"></span
+            ></a>
+            <a [routerLink]="category.maskId">
+              <span class="bi bi-pencil-fill action-icon pull-right"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
