@@ -1,23 +1,20 @@
-<div class="card">
-  <app-loading></app-loading>
-  <div *ngIf="article">
-    <div class="row">
-      <div class="col-12">
-        <h3>
-          Are you sure you want to delete the article about {{ article.title }}?
-        </h3>
-        <p>This action will remove the article and this can not be reverted!</p>
-        <div>
-          <button class="btn btn-light pull-right" (click)="cancel()">
-            Cancel
-          </button>
-          <button
-            class="btn btn-danger pull-right me-3"
-            (click)="deleteArticle()"
-          >
-            Delete article
-          </button>
-        </div>
+<div *ngIf="article">
+  <div class="row">
+    <div class="col-12">
+      <h3>
+        Are you sure you want to delete the article about {{ article.title }}?
+      </h3>
+      <p>This action will remove the article and this can not be reverted!</p>
+      <div>
+        <button class="btn btn-light pull-right" (click)="cancel()">
+          Cancel
+        </button>
+        <button
+          class="btn btn-danger pull-right me-3"
+          (click)="deleteArticle()"
+        >
+          Delete article
+        </button>
       </div>
     </div>
   </div>

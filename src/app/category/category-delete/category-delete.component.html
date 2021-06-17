@@ -1,26 +1,19 @@
-<div class="card">
-  <app-loading></app-loading>
-  <div *ngIf="category">
-    <div class="row">
-      <div class="col-12">
-        <h3>
-          Are you sure you want to delete the category {{ category.name }}?
-        </h3>
-        <p>
-          This action will remove the category and this can not be reverted!
-        </p>
-        <p>All articles from this category will become uncategorized</p>
-        <div>
-          <button class="btn btn-light pull-right" (click)="cancel()">
-            Cancel
-          </button>
-          <button
-            class="btn btn-danger pull-right me-3"
-            (click)="deleteCategory()"
-          >
-            Delete category
-          </button>
-        </div>
+<div *ngIf="category">
+  <div class="row">
+    <div class="col-12">
+      <h3>Are you sure you want to delete the category {{ category.name }}?</h3>
+      <p>This action will remove the category and this can not be reverted!</p>
+      <p>All articles from this category will become uncategorized</p>
+      <div>
+        <button class="btn btn-light pull-right" (click)="cancel()">
+          Cancel
+        </button>
+        <button
+          class="btn btn-danger pull-right me-3"
+          (click)="deleteCategory()"
+        >
+          Delete category
+        </button>
       </div>
     </div>
   </div>
