@@ -46,6 +46,11 @@ a.color-pink:hover {
   margin-top: 1rem;
 }
 
+.btn,
+.form-control {
+  border-radius: 0;
+}
+
 .btn-category {
   padding: 0 8px;
   min-height: 24px;
@@ -57,7 +62,7 @@ a.color-pink:hover {
   margin-top: 6px;
   margin-bottom: 6px;
   font-weight: 500;
-  border-radius: 2px;
+
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   text-align: center;
 }
