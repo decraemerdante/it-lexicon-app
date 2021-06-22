@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/shared/api.service';
-import { CategoryDto} from "../../shared/API";
+import {CategoryDto} from "../../shared/models/CategoryDto";
 
 @Component({
   selector: 'app-category-add',

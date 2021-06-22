@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/shared/api.service';
-import {ArticleDto, CategoryDto} from "../../shared/API";
+import {ArticleDto} from "../../shared/models/ArticleDto";
+import {CategoryDto} from "../../shared/models/CategoryDto";
 
 @Component({
   selector: 'app-article-add',
@@ -21,7 +22,7 @@ export class ArticleAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.article = {} as ArticleDto;
+    this.article = new ArticleDto();
     this.spinner.show();
 
     this.id = this.route.snapshot.params['id'];
@@ -45,13 +46,13 @@ export class ArticleAddComponent implements OnInit {
   addArticle(data: ArticleDto) {
     this.spinner.show();
     if (this.id) {
-      this.api.update(this.article).subscribe((response) => {
+      this.api.articleClient.update(this.article).subscribe((response) => {
         this.spinner.hide();
 
         this.router.navigateByUrl('/article/' + this.id);
       });
     } else {
-      this.api.add(this.article).subscribe((response) => {
+      this.api.articleClient.add(this.article).subscribe((response) => {
         this.spinner.hide();
 
         this.router.navigateByUrl('/article/' + response);

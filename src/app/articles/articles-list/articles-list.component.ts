@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from '../../shared/api.service';
-import {ArticleDto, CategoryDto} from "../../shared/API";
+import {CategoryDto} from "../../shared/models/CategoryDto";
+import {ArticleDto} from "../../shared/models/ArticleDto";
 
 @Component({
   selector: 'app-articles-list',
