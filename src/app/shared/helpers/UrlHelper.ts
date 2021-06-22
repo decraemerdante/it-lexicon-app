@@ -1,4 +1,4 @@
-import {StringHelper} from "./StringHelper";
+import { StringHelper } from './StringHelper';
 
 export class UrlHelper {
   static url = new URL(window.location.href);
@@ -7,10 +7,12 @@ export class UrlHelper {
 
   static hideInternalUrls(value: string | undefined): string | undefined {
     if (value) {
-      value = StringHelper.replaceAll(value, UrlHelper.exposedUrl, UrlHelper.startUrl);
+      value = StringHelper.replaceAll(
+        value,
+        UrlHelper.exposedUrl,
+        UrlHelper.startUrl
+      );
     }
-
     return value;
   }
-
 }
