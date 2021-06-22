@@ -1,0 +1,14 @@
+<h3 *ngIf="mainArticle">Linked articles of {{ mainArticle.title }}</h3>
+<div class="col-12">
+  <span *ngIf="articles && articles.length > 0 && linkedArticles">
+    <a
+      *ngFor="let article of articles"
+      class="btn btn-category"
+      [ngClass]="getActiveClass(article.maskId)"
+      [id]="article.maskId"
+      (click)="handleClick(article.maskId)"
+    >
+      {{ article.title }}
+    </a>
+  </span>
+</div>
