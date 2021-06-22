@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/shared/api.service';
-import {CategoryDto} from "../../shared/models/CategoryDto";
+import { CategoryDto} from "../../shared/API";
 
 @Component({
   selector: 'app-category-delete',

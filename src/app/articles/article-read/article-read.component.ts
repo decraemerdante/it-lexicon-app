@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/shared/api.service';
-import {ArticleDto} from "../../shared/models/ArticleDto";
+import {ArticleDto} from "../../shared/API";
 import {Title} from "@angular/platform-browser";
 
 @Component({
