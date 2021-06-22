@@ -26,21 +26,17 @@ export class LinkedArticlesEditComponent implements OnInit {
   fetchData() {
     this.spinner.show();
     let maskId = this.route.snapshot.params['id'];
-    let mainArticle = {} as ArticleDto;
-    this.api.articleClient.getAll().subscribe((response) => {
-      this.articles = response.filter(function (article) {
-        if (article.maskId === maskId) {
-          mainArticle = article;
-        } else {
-          return article;
-        }
-      });
-      this.mainArticle = mainArticle;
-      this.api.articleClient.getLinkedArticles(maskId).subscribe((response) => {
-        this.linkedArticles = response;
+
+    this.api.articleClient
+      .getLinkedArticlesOverview(maskId)
+      .subscribe((response) => {
+        this.articles = response.allArticles.filter(function (article) {
+          return article.maskId !== maskId;
+        });
+        this.mainArticle = response.mainArticle;
+        this.linkedArticles = response.linkedArticles;
         this.spinner.hide();
       });
-    });
   }
 
   getActiveClass(id) {
