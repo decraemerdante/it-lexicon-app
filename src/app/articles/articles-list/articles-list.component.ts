@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ArticleDto, CategoryDto } from '../../shared/API';
 import { APIService } from '../../shared/api.service';
@@ -17,7 +17,8 @@ export class ArticlesListComponent implements OnInit {
   constructor(
     private api: APIService,
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

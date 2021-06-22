@@ -48,7 +48,9 @@ import { CategoryDeleteComponent } from './category/category-delete/category-del
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      onSameUrlNavigation: 'reload',
+    }),
     FormsModule,
     AngularEditorModule,
   ],

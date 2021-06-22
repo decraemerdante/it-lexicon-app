@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterEvent,
+} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ArticleDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
@@ -11,6 +16,7 @@ import { APIService } from 'src/app/shared/api.service';
 })
 export class ArticleReadComponent implements OnInit {
   article: ArticleDto;
+  linkedArticles: ArticleDto[];
   constructor(
     private api: APIService,
     private spinner: NgxSpinnerService,
@@ -22,6 +28,12 @@ export class ArticleReadComponent implements OnInit {
     this.api.articleClient.get(this.route.snapshot.params['id']).subscribe(
       (article) => {
         this.article = article;
+        this.api.articleClient
+          .getLinkedArticles(this.route.snapshot.params['id'])
+          .subscribe((response) => {
+            this.linkedArticles = response;
+            this.spinner.hide();
+          });
       },
       (error) => {
         this.router.navigateByUrl('');
