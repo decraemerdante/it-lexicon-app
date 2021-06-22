@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CategoryDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
+import {CategoryDto} from "../../shared/models/CategoryDto";
 
 @Component({
   selector: 'app-category-edit',

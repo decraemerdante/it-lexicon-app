@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ArticleDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
+import {ArticleDto} from "../../shared/models/ArticleDto";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-article-read',
@@ -15,13 +16,15 @@ export class ArticleReadComponent implements OnInit {
     private api: APIService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.api.articleClient.get(this.route.snapshot.params['id']).subscribe(
       (article) => {
         this.article = article;
+        this.titleService.setTitle(article.title);
       },
       (error) => {
         this.router.navigateByUrl('');

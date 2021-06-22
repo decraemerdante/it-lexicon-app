@@ -11,6 +11,10 @@ import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 
 import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
+import {ArticleDto} from "./models/ArticleDto";
+import {FileResponse} from "./models/FileResponse";
+import {CategoryDto} from "./models/CategoryDto";
+import {ApiException} from "./exceptions/ApiException";
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
@@ -25,12 +29,12 @@ export class ArticleClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
     }
 
-    
+
     add(article: ArticleDto): Observable<string> {
         let url_ = this.baseUrl + "/api/Article";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(article);
+        const content_ = article.toJson();
 
         let options_ : any = {
             body: content_,
@@ -128,7 +132,7 @@ export class ArticleClient {
         let url_ = this.baseUrl + "/api/Article";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(article);
+        const content_ = article.toJson();
 
         let options_ : any = {
             body: content_,
@@ -313,7 +317,7 @@ export class ArticleClient {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <ArticleDto>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : new ArticleDto(JSON.parse(_responseText));
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -581,51 +585,6 @@ export class CategoryClient {
             }));
         }
         return _observableOf<CategoryDto>(<any>null);
-    }
-}
-
-export interface ArticleDto {
-    title?: string | undefined;
-    content?: string | undefined;
-    maskId: string;
-    categoryId?: number | undefined;
-    categoryMaskId?: string | undefined;
-}
-
-export interface CategoryDto {
-    name?: string | undefined;
-    maskId: string;
-    articles?: ArticleDto[] | undefined;
-}
-
-export interface FileResponse {
-    data: Blob;
-    status: number;
-    fileName?: string;
-    headers?: { [name: string]: any };
-}
-
-export class ApiException extends Error {
-    message: string;
-    status: number;
-    response: string;
-    headers: { [key: string]: any; };
-    result: any;
-
-    constructor(message: string, status: number, response: string, headers: { [key: string]: any; }, result: any) {
-        super();
-
-        this.message = message;
-        this.status = status;
-        this.response = response;
-        this.headers = headers;
-        this.result = result;
-    }
-
-    protected isApiException = true;
-
-    static isApiException(obj: any): obj is ApiException {
-        return obj.isApiException === true;
     }
 }
 
