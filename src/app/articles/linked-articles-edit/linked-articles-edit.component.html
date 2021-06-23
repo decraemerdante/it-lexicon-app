@@ -1,8 +1,36 @@
 <h3 *ngIf="mainArticle">Linked articles of {{ mainArticle.title }}</h3>
+<hr />
 <div class="col-12">
+  <h4>Search</h4>
+  <form #searchForm="ngForm" (ngSubmit)="search(searchForm.value)">
+    <div class="row">
+      <div class="col-md-4 col-xs-12">
+        <input
+          type="text"
+          name="searchTerm"
+          id="searchTerm"
+          class="form-control"
+          [(ngModel)]="searchTerm"
+          [value]="searchTerm"
+        />
+      </div>
+      <div class="col-md-4 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <button
+          class="ms-2 btn btn-secondary"
+          type="submit"
+          (click)="removeFilter()"
+        >
+          Clear filter
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="col-12 mt-3">
   <span *ngIf="articles && articles.length > 0 && linkedArticles">
     <a
-      *ngFor="let article of articles"
+      *ngFor="let article of filteredArticles"
       class="btn btn-category"
       [ngClass]="getActiveClass(article.maskId)"
       [id]="article.maskId"

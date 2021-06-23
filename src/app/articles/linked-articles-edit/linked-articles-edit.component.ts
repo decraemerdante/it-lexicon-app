@@ -13,6 +13,8 @@ export class LinkedArticlesEditComponent implements OnInit {
   articles: ArticleDto[];
   mainArticle: ArticleDto;
   linkedArticles: ArticleDto[];
+  filteredArticles: ArticleDto[];
+  searchTerm;
   constructor(
     private api: APIService,
     private route: ActivatedRoute,
@@ -33,6 +35,7 @@ export class LinkedArticlesEditComponent implements OnInit {
         this.articles = response.allArticles.filter(function (article) {
           return article.maskId !== maskId;
         });
+        this.filteredArticles = this.articles;
         this.mainArticle = response.mainArticle;
         this.linkedArticles = response.linkedArticles;
         this.spinner.hide();
@@ -95,5 +98,24 @@ export class LinkedArticlesEditComponent implements OnInit {
         this.spinner.hide();
         this.fetchData();
       });
+  }
+
+  search(data) {
+    let searchTerm = data.searchTerm;
+    if (searchTerm && searchTerm != '') {
+      this.filteredArticles = this.articles.filter(function (article) {
+        return (
+          article.title
+            .toLocaleLowerCase()
+            .indexOf(searchTerm.toLocaleLowerCase()) != -1
+        );
+      });
+    } else {
+      this.removeFilter();
+    }
+  }
+  removeFilter() {
+    this.searchTerm = '';
+    this.filteredArticles = this.articles;
   }
 }

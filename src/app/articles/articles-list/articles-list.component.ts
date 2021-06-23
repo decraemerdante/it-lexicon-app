@@ -88,4 +88,9 @@ export class ArticlesListComponent implements OnInit {
     this.searchTerm = data.searchTerm;
     this.articles = this.filterArticles();
   }
+
+  removeFilter() {
+    this.searchTerm = '';
+    this.articles = this.filterArticles();
+  }
 }

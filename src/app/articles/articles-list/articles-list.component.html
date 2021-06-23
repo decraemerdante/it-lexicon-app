@@ -35,12 +35,15 @@
           name="searchTerm"
           id="searchTerm"
           class="form-control"
-          (ngModel)="(searchTerm)"
+          [(ngModel)]="searchTerm"
           [value]="searchTerm"
         />
       </div>
-      <div class="col-md-2 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
-        <button type="submit" class="btn btn-primary w-100">Search</button>
+      <div class="col-md-4 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <button class="ms-2 btn btn-secondary" (click)="removeFilter()">
+          Clear filter
+        </button>
       </div>
     </div>
   </form>
