@@ -39,7 +39,7 @@
           [value]="searchTerm"
         />
       </div>
-      <div class="col-md-4 col-sm-12 mt-sm-2 mt-xs-2 mt-md-0">
+      <div class="col-md-4 col-sm-12 mt-2">
         <button type="submit" class="btn btn-primary">Search</button>
         <button class="ms-2 btn btn-secondary" (click)="removeFilter()">
           Clear filter
@@ -49,13 +49,13 @@
   </form>
 </div>
 <div class="col-12 mt-3">
-  <a class="color-pink pull-right" [routerLink]="['/article/add']"
+  <a class="color-pink pull-right mb-3" [routerLink]="['/article/add']"
     ><span class="bi bi-plus-lg action-icon me-2"></span> Add new article</a
   >
 </div>
 
 <div class="col-12 mt-3" *ngIf="articles && articles.length > 0">
-  <table class="table table-responsive table-striped">
+  <table class="table table-responsive table-striped mt-3">
     <tbody>
       <tr *ngFor="let article of articles">
         <td>
