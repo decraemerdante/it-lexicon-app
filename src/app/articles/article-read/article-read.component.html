@@ -7,6 +7,34 @@
       </a>
     </span>
   </h3>
-
-  <div class="col-12 mt-3" [innerHtml]="article.content"></div>
+  <hr />
+  <div class="row">
+    <div
+      class="col-md-9 col-sm-12 col-xs-12 mt-3"
+      [innerHtml]="article.content"
+    ></div>
+    <div class="border-start col-md-3 col-sm-12 col-xs-12 mt-3">
+      <h4>
+        Linked articles
+        <span>
+          <a [routerLink]="['/article/links/', article.maskId]">
+            <span class="bi bi-pencil action-icon"></span>
+          </a>
+        </span>
+      </h4>
+      <div class="col-12">
+        <span *ngIf="linkedArticles && linkedArticles.length > 0">
+          <a
+            *ngFor="let linkedArticle of linkedArticles"
+            class="btn btn-category"
+            [id]="linkedArticle.maskId"
+            [routerLink]="['/article', linkedArticle.maskId]"
+            target="_parent"
+          >
+            {{ linkedArticle.title }}
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

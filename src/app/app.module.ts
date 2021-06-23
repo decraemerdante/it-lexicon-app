@@ -28,6 +28,7 @@ import {
 import { routes } from './routes';
 import { ArticleDeleteComponent } from './articles/article-delete/article-delete.component';
 import { CategoryDeleteComponent } from './category/category-delete/category-delete.component';
+import { LinkedArticlesEditComponent } from './articles/linked-articles-edit/linked-articles-edit.component';
 
 @NgModule({
   declarations: [
@@ -42,13 +43,16 @@ import { CategoryDeleteComponent } from './category/category-delete/category-del
     ArticleReadComponent,
     ArticleDeleteComponent,
     CategoryDeleteComponent,
+    LinkedArticlesEditComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      onSameUrlNavigation: 'reload',
+    }),
     FormsModule,
     AngularEditorModule,
   ],
