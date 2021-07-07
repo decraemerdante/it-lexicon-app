@@ -797,17 +797,28 @@ export class LinkedClient {
 }
 
 export interface ArticleDto {
-    title?: string | undefined;
-    content?: string | undefined;
+    title: string | undefined;
+    content: string | undefined;
     maskId: string;
-    categoryId?: number | undefined;
-    categoryMaskId?: string | undefined;
+    categoryId: number | undefined;
+    categoryMaskId: string | undefined;
+    changeLogs: ChangeLogDto[] | undefined;
+}
+
+export interface ChangeLogDto {
+    type: LogItemEnum;
+    date: Date;
+}
+
+export enum LogItemEnum {
+    CREATED = 0,
+    UPDATED = 1,
 }
 
 export interface CategoryDto {
-    name?: string | undefined;
+    name: string | undefined;
     maskId: string;
-    articles?: ArticleDto[] | undefined;
+    articles: ArticleDto[] | undefined;
 }
 
 export interface LinkedArticlesDto {
@@ -816,9 +827,9 @@ export interface LinkedArticlesDto {
 }
 
 export interface LinkedArticleOverviewDto {
-    mainArticle?: ArticleDto | undefined;
-    linkedArticles?: ArticleDto[] | undefined;
-    allArticles?: ArticleDto[] | undefined;
+    mainArticle: ArticleDto | undefined;
+    linkedArticles: ArticleDto[] | undefined;
+    allArticles: ArticleDto[] | undefined;
 }
 
 export interface FileResponse {
