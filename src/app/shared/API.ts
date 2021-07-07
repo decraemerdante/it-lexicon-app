@@ -322,207 +322,6 @@ export class ArticleClient {
         }
         return _observableOf<ArticleDto[]>(<any>null);
     }
-
-    getLinkedArticles(maskId: string): Observable<ArticleDto[]> {
-        let url_ = this.baseUrl + "/api/Article/Linked/{maskId}";
-        if (maskId === undefined || maskId === null)
-            throw new Error("The parameter 'maskId' must be defined.");
-        url_ = url_.replace("{maskId}", encodeURIComponent("" + maskId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetLinkedArticles(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetLinkedArticles(<any>response_);
-                } catch (e) {
-                    return <Observable<ArticleDto[]>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<ArticleDto[]>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetLinkedArticles(response: HttpResponseBase): Observable<ArticleDto[]> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            result200 = _responseText === "" ? null : <ArticleDto[]>JSON.parse(_responseText, this.jsonParseReviver);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<ArticleDto[]>(<any>null);
-    }
-
-    getLinkedArticlesOverview(maskId: string): Observable<LinkedArticleOverviewDto> {
-        let url_ = this.baseUrl + "/api/Article/Linked/Overview/{maskId}";
-        if (maskId === undefined || maskId === null)
-            throw new Error("The parameter 'maskId' must be defined.");
-        url_ = url_.replace("{maskId}", encodeURIComponent("" + maskId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetLinkedArticlesOverview(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetLinkedArticlesOverview(<any>response_);
-                } catch (e) {
-                    return <Observable<LinkedArticleOverviewDto>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<LinkedArticleOverviewDto>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetLinkedArticlesOverview(response: HttpResponseBase): Observable<LinkedArticleOverviewDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            result200 = _responseText === "" ? null : <LinkedArticleOverviewDto>JSON.parse(_responseText, this.jsonParseReviver);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<LinkedArticleOverviewDto>(<any>null);
-    }
-
-    addLinkedArticle(linkedArticles: LinkedArticlesDto): Observable<string> {
-        let url_ = this.baseUrl + "/api/Article/Linked";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(linkedArticles);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddLinkedArticle(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processAddLinkedArticle(<any>response_);
-                } catch (e) {
-                    return <Observable<string>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<string>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processAddLinkedArticle(response: HttpResponseBase): Observable<string> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            result200 = _responseText === "" ? null : <string>JSON.parse(_responseText, this.jsonParseReviver);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<string>(<any>null);
-    }
-
-    deleteLinkedArticle(linkedArticles: LinkedArticlesDto): Observable<FileResponse | null> {
-        let url_ = this.baseUrl + "/api/Article/Linked";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(linkedArticles);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
-            })
-        };
-
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processDeleteLinkedArticle(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processDeleteLinkedArticle(<any>response_);
-                } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processDeleteLinkedArticle(response: HttpResponseBase): Observable<FileResponse | null> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<FileResponse | null>(<any>null);
-    }
 }
 
 @Injectable()
@@ -784,6 +583,219 @@ export class CategoryClient {
     }
 }
 
+@Injectable()
+export class LinkedClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
+    }
+
+    getLinkedArticles(maskId: string): Observable<ArticleDto[]> {
+        let url_ = this.baseUrl + "/api/Linked/{maskId}";
+        if (maskId === undefined || maskId === null)
+            throw new Error("The parameter 'maskId' must be defined.");
+        url_ = url_.replace("{maskId}", encodeURIComponent("" + maskId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetLinkedArticles(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetLinkedArticles(<any>response_);
+                } catch (e) {
+                    return <Observable<ArticleDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ArticleDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetLinkedArticles(response: HttpResponseBase): Observable<ArticleDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <ArticleDto[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ArticleDto[]>(<any>null);
+    }
+
+    addLinkedArticle(linkedArticles: LinkedArticlesDto): Observable<string> {
+        let url_ = this.baseUrl + "/api/Linked/Linked";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(linkedArticles);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddLinkedArticle(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddLinkedArticle(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddLinkedArticle(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <string>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<string>(<any>null);
+    }
+
+    deleteLinkedArticle(linkedArticles: LinkedArticlesDto): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/api/Linked/Linked";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(linkedArticles);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteLinkedArticle(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteLinkedArticle(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteLinkedArticle(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(<any>null);
+    }
+
+    getLinkedArticlesOverview(maskId: string): Observable<LinkedArticleOverviewDto> {
+        let url_ = this.baseUrl + "/api/Linked/Overview/{maskId}";
+        if (maskId === undefined || maskId === null)
+            throw new Error("The parameter 'maskId' must be defined.");
+        url_ = url_.replace("{maskId}", encodeURIComponent("" + maskId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetLinkedArticlesOverview(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetLinkedArticlesOverview(<any>response_);
+                } catch (e) {
+                    return <Observable<LinkedArticleOverviewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<LinkedArticleOverviewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetLinkedArticlesOverview(response: HttpResponseBase): Observable<LinkedArticleOverviewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <LinkedArticleOverviewDto>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<LinkedArticleOverviewDto>(<any>null);
+    }
+}
+
 export interface ArticleDto {
     title?: string | undefined;
     content?: string | undefined;
@@ -792,10 +804,10 @@ export interface ArticleDto {
     categoryMaskId?: string | undefined;
 }
 
-export interface LinkedArticleOverviewDto {
-    mainArticle?: ArticleDto | undefined;
-    linkedArticles?: ArticleDto[] | undefined;
-    allArticles?: ArticleDto[] | undefined;
+export interface CategoryDto {
+    name?: string | undefined;
+    maskId: string;
+    articles?: ArticleDto[] | undefined;
 }
 
 export interface LinkedArticlesDto {
@@ -803,10 +815,10 @@ export interface LinkedArticlesDto {
     linkedArticleId: string;
 }
 
-export interface CategoryDto {
-    name?: string | undefined;
-    maskId: string;
-    articles?: ArticleDto[] | undefined;
+export interface LinkedArticleOverviewDto {
+    mainArticle?: ArticleDto | undefined;
+    linkedArticles?: ArticleDto[] | undefined;
+    allArticles?: ArticleDto[] | undefined;
 }
 
 export interface FileResponse {

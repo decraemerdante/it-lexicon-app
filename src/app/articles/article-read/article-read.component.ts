@@ -28,7 +28,7 @@ export class ArticleReadComponent implements OnInit {
     this.api.articleClient.get(this.route.snapshot.params['id']).subscribe(
       (article) => {
         this.article = article;
-        this.api.articleClient
+        this.api.linkedClient
           .getLinkedArticles(this.route.snapshot.params['id'])
           .subscribe((response) => {
             this.linkedArticles = response;

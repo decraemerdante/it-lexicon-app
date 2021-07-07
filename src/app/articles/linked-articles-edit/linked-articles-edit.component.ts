@@ -29,7 +29,7 @@ export class LinkedArticlesEditComponent implements OnInit {
     this.spinner.show();
     let maskId = this.route.snapshot.params['id'];
 
-    this.api.articleClient
+    this.api.linkedClient
       .getLinkedArticlesOverview(maskId)
       .subscribe((response) => {
         this.articles = response.allArticles.filter(function (article) {
@@ -76,7 +76,7 @@ export class LinkedArticlesEditComponent implements OnInit {
       linkedArticleId: id,
     } as LinkedArticlesDto;
 
-    this.api.articleClient
+    this.api.linkedClient
       .deleteLinkedArticle(linkedArticles)
       .subscribe((response) => {
         this.spinner.hide();
@@ -92,7 +92,7 @@ export class LinkedArticlesEditComponent implements OnInit {
       linkedArticleId: id,
     } as LinkedArticlesDto;
 
-    this.api.articleClient
+    this.api.linkedClient
       .addLinkedArticle(linkedArticles)
       .subscribe((response) => {
         this.spinner.hide();
