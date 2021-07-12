@@ -29,6 +29,8 @@ import { routes } from './routes';
 import { ArticleDeleteComponent } from './articles/article-delete/article-delete.component';
 import { CategoryDeleteComponent } from './category/category-delete/category-delete.component';
 import { LinkedArticlesEditComponent } from './articles/linked-articles-edit/linked-articles-edit.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { LinkedArticlesEditComponent } from './articles/linked-articles-edit/lin
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
@@ -55,6 +58,7 @@ import { LinkedArticlesEditComponent } from './articles/linked-articles-edit/lin
     }),
     FormsModule,
     AngularEditorModule,
+    ToastrModule.forRoot(),
   ],
   providers: [ArticleClient, CategoryClient, HttpClient, APIService],
   bootstrap: [AppComponent],

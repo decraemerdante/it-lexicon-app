@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { ArticleDto, CategoryDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
 
@@ -17,11 +18,13 @@ export class ArticleAddComponent implements OnInit {
     private api: APIService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.article = {} as ArticleDto;
+    console.log(this.article.categoryMaskId);
     this.spinner.show();
 
     this.id = this.route.snapshot.params['id'];
@@ -31,6 +34,7 @@ export class ArticleAddComponent implements OnInit {
       if (this.id) {
         this.getArticle(this.id);
       } else {
+        this.article.categoryMaskId = '00000000-0000-0000-0000-000000000000';
         this.spinner.hide();
       }
     });
@@ -45,17 +49,27 @@ export class ArticleAddComponent implements OnInit {
   addArticle(data: ArticleDto) {
     this.spinner.show();
     if (this.id) {
-      this.api.articleClient.update(this.article).subscribe((response) => {
-        this.spinner.hide();
-
-        this.router.navigateByUrl('/article/' + this.id);
-      });
+      this.api.articleClient.update(this.article).subscribe(
+        (response) => {
+          this.spinner.hide();
+          this.toastr.success('Article has been updated');
+          this.router.navigateByUrl('/article/' + this.id);
+        },
+        (error) => {
+          this.toastr.error('Something went wrong');
+        }
+      );
     } else {
-      this.api.articleClient.add(this.article).subscribe((response) => {
-        this.spinner.hide();
-
-        this.router.navigateByUrl('/article/' + response);
-      });
+      this.api.articleClient.add(this.article).subscribe(
+        (response) => {
+          this.spinner.hide();
+          this.toastr.success('Article has been added');
+          this.router.navigateByUrl('/article/' + response);
+        },
+        (error) => {
+          this.toastr.error('Something went wrong');
+        }
+      );
     }
   }
 }

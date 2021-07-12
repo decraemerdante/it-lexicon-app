@@ -6,6 +6,7 @@ import {
   RouterEvent,
 } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { ArticleDto, ChangeLogDto, LogItemEnum } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
 
@@ -22,7 +23,8 @@ export class ArticleReadComponent implements OnInit {
     private api: APIService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,10 +37,15 @@ export class ArticleReadComponent implements OnInit {
 
         this.api.linkedClient
           .getLinkedArticles(this.route.snapshot.params['id'])
-          .subscribe((response) => {
-            this.linkedArticles = response;
-            this.spinner.hide();
-          });
+          .subscribe(
+            (response) => {
+              this.linkedArticles = response;
+              this.spinner.hide();
+            },
+            (error) => {
+              this.toastr.error('Something went wrong');
+            }
+          );
       },
       (error) => {
         this.router.navigateByUrl('');

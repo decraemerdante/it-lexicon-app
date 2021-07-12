@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { ArticleDto, LinkedArticlesDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
 
@@ -18,7 +19,8 @@ export class LinkedArticlesEditComponent implements OnInit {
   constructor(
     private api: APIService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -29,9 +31,8 @@ export class LinkedArticlesEditComponent implements OnInit {
     this.spinner.show();
     let maskId = this.route.snapshot.params['id'];
 
-    this.api.linkedClient
-      .getLinkedArticlesOverview(maskId)
-      .subscribe((response) => {
+    this.api.linkedClient.getLinkedArticlesOverview(maskId).subscribe(
+      (response) => {
         this.articles = response.allArticles.filter(function (article) {
           return article.maskId !== maskId;
         });
@@ -39,7 +40,11 @@ export class LinkedArticlesEditComponent implements OnInit {
         this.mainArticle = response.mainArticle;
         this.linkedArticles = response.linkedArticles;
         this.spinner.hide();
-      });
+      },
+      (error) => {
+        this.toastr.error('Something went wrong');
+      }
+    );
   }
 
   getActiveClass(id) {
@@ -76,12 +81,16 @@ export class LinkedArticlesEditComponent implements OnInit {
       linkedArticleId: id,
     } as LinkedArticlesDto;
 
-    this.api.linkedClient
-      .deleteLinkedArticle(linkedArticles)
-      .subscribe((response) => {
+    this.api.linkedClient.deleteLinkedArticle(linkedArticles).subscribe(
+      (response) => {
         this.spinner.hide();
+        this.toastr.success('Links between articles have been removed');
         this.fetchData();
-      });
+      },
+      (error) => {
+        this.toastr.error('Something went wrong');
+      }
+    );
   }
 
   addLink(id: any) {
@@ -92,12 +101,16 @@ export class LinkedArticlesEditComponent implements OnInit {
       linkedArticleId: id,
     } as LinkedArticlesDto;
 
-    this.api.linkedClient
-      .addLinkedArticle(linkedArticles)
-      .subscribe((response) => {
+    this.api.linkedClient.addLinkedArticle(linkedArticles).subscribe(
+      (response) => {
         this.spinner.hide();
+        this.toastr.success('Articles have been linked');
         this.fetchData();
-      });
+      },
+      (error) => {
+        this.toastr.error('Something went wrong');
+      }
+    );
   }
 
   search(data) {

@@ -25,12 +25,7 @@
         name="categoryMaskId"
         id="categoryMaskId"
       >
-        <option
-          value="00000000-0000-0000-0000-000000000000"
-          [selected]="!article.categoryMaskId"
-        >
-          All
-        </option>
+        <option value="00000000-0000-0000-0000-000000000000">None</option>
         <option *ngFor="let category of categories" [value]="category.maskId">
           {{ category.name }}
         </option>

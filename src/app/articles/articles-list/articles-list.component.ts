@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { ArticleDto, CategoryDto } from '../../shared/API';
 import { APIService } from '../../shared/api.service';
 
@@ -18,7 +19,8 @@ export class ArticlesListComponent implements OnInit {
     private api: APIService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -72,16 +74,26 @@ export class ArticlesListComponent implements OnInit {
 
   getCategories() {
     this.spinner.show();
-    this.api.categoryClient.getAll().subscribe((data: CategoryDto[]) => {
-      this.categories = data;
+    this.api.categoryClient.getAll().subscribe(
+      (data: CategoryDto[]) => {
+        this.categories = data;
 
-      this.api.articleClient.getAll().subscribe((articles) => {
-        this.allArticles = articles;
-        let articlesFiltered = this.filterArticles();
-        this.articles = articlesFiltered;
-        this.spinner.hide();
-      });
-    });
+        this.api.articleClient.getAll().subscribe(
+          (articles) => {
+            this.allArticles = articles;
+            let articlesFiltered = this.filterArticles();
+            this.articles = articlesFiltered;
+            this.spinner.hide();
+          },
+          (error) => {
+            this.toastr.error('Something went wrong while getting articles');
+          }
+        );
+      },
+      (error) => {
+        this.toastr.error('Something went wrong while getting categories');
+      }
+    );
   }
 
   search(data) {
