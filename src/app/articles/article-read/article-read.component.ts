@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { ArticleDto, ChangeLogDto, LogItemEnum } from 'src/app/shared/API';
+import { ArticleDto } from 'src/app/shared/API';
 import { APIService } from 'src/app/shared/api.service';
 
 @Component({
@@ -18,7 +18,6 @@ import { APIService } from 'src/app/shared/api.service';
 export class ArticleReadComponent implements OnInit {
   article: ArticleDto;
   linkedArticles: ArticleDto[];
-  changelog: ChangeLogDto;
   constructor(
     private api: APIService,
     private spinner: NgxSpinnerService,
@@ -31,9 +30,6 @@ export class ArticleReadComponent implements OnInit {
     this.api.articleClient.get(this.route.snapshot.params['id']).subscribe(
       (article) => {
         this.article = article;
-        if (article.changeLogs && article.changeLogs.length > 0) {
-          this.changelog = article.changeLogs[article.changeLogs.length - 1];
-        }
 
         this.api.linkedClient
           .getLinkedArticles(this.route.snapshot.params['id'])
@@ -51,21 +47,5 @@ export class ArticleReadComponent implements OnInit {
         this.router.navigateByUrl('');
       }
     );
-  }
-
-  setChangelog() {
-    let changelogString = '';
-    switch (this.changelog.type) {
-      case LogItemEnum.CREATED:
-        changelogString = 'Created on ';
-        break;
-      case LogItemEnum.UPDATED:
-        changelogString = 'Updated on ';
-        break;
-    }
-
-    changelogString += '' + new Date(this.changelog.date).toLocaleString();
-
-    return changelogString;
   }
 }

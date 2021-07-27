@@ -35,12 +35,10 @@ export class CategoryDeleteComponent implements OnInit {
   deleteCategory() {
     this.spinner.show();
 
-    this.api.categoryClient
-      .delete(this.category.maskId)
-      .subscribe((response) => {
-        this.spinner.hide();
-        this.router.navigateByUrl('/category');
-      });
+    this.api.categoryClient.delete(this.category.id).subscribe((response) => {
+      this.spinner.hide();
+      this.router.navigateByUrl('/category');
+    });
   }
 
   cancel() {

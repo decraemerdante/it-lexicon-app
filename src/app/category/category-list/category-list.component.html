@@ -13,10 +13,10 @@
         <tr *ngFor="let category of categories">
           <td>{{ category.name }}</td>
           <td class="article-actions">
-            <a [routerLink]="['/category/delete', category.maskId]">
+            <a [routerLink]="['/category/delete', category.id]">
               <span class="bi bi-trash-fill action-icon pull-right ms-4"></span
             ></a>
-            <a [routerLink]="category.maskId">
+            <a [routerLink]="category.id">
               <span class="bi bi-pencil-fill action-icon pull-right"></span>
             </a>
           </td>

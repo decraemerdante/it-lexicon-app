@@ -34,7 +34,7 @@ export class LinkedArticlesEditComponent implements OnInit {
     this.api.linkedClient.getLinkedArticlesOverview(maskId).subscribe(
       (response) => {
         this.articles = response.allArticles.filter(function (article) {
-          return article.maskId !== maskId;
+          return article.id !== maskId;
         });
         this.filteredArticles = this.articles;
         this.mainArticle = response.mainArticle;
@@ -56,7 +56,7 @@ export class LinkedArticlesEditComponent implements OnInit {
 
   isLinked(id) {
     let findArticle = this.linkedArticles.find(function (article) {
-      return article.maskId == id;
+      return article.id == id;
     });
 
     if (findArticle) {

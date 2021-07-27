@@ -35,7 +35,7 @@ export class ArticleDeleteComponent implements OnInit {
 
   deleteArticle() {
     this.spinner.show();
-    this.api.articleClient.delete(this.article.maskId).subscribe(
+    this.api.articleClient.delete(this.article.id).subscribe(
       (response) => {
         this.spinner.hide();
         this.toastr.success('Article has been deleted');

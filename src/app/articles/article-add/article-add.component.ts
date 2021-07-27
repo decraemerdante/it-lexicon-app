@@ -24,7 +24,7 @@ export class ArticleAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.article = {} as ArticleDto;
-    console.log(this.article.categoryMaskId);
+    console.log(this.article.categoryId);
     this.spinner.show();
 
     this.id = this.route.snapshot.params['id'];
@@ -34,7 +34,7 @@ export class ArticleAddComponent implements OnInit {
       if (this.id) {
         this.getArticle(this.id);
       } else {
-        this.article.categoryMaskId = '00000000-0000-0000-0000-000000000000';
+        this.article.categoryId = '';
         this.spinner.hide();
       }
     });

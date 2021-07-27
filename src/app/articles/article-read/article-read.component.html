@@ -2,12 +2,11 @@
   <h3>
     {{ article.title }}
     <span>
-      <a [routerLink]="['/article/edit', article.maskId]">
+      <a [routerLink]="['/article/edit', article.id]">
         <span class="bi bi-pencil action-icon"></span>
       </a>
     </span>
   </h3>
-  <i *ngIf="changelog">{{ setChangelog() }}</i>
   <hr />
   <div class="row">
     <div
@@ -18,7 +17,7 @@
       <h4>
         Linked articles
         <span>
-          <a [routerLink]="['/article/links/', article.maskId]">
+          <a [routerLink]="['/article/links/', article.id]">
             <span class="bi bi-pencil action-icon"></span>
           </a>
         </span>
@@ -28,8 +27,8 @@
           <a
             *ngFor="let linkedArticle of linkedArticles"
             class="btn btn-category"
-            [id]="linkedArticle.maskId"
-            [routerLink]="['/article', linkedArticle.maskId]"
+            [id]="linkedArticle.id"
+            [routerLink]="['/article', linkedArticle.id]"
             target="_parent"
           >
             {{ linkedArticle.title }}
