@@ -1,6 +1,6 @@
 <h4>
-  <span *ngIf="!article.categoryMaskId">Add new</span>
-  <span *ngIf="article.categoryMaskId">Edit</span> article
+  <span *ngIf="!article.categoryId">Add new</span>
+  <span *ngIf="article.categoryId">Edit</span> article
 </h4>
 <form #addArticleForm="ngForm" (ngSubmit)="addArticle(addArticleForm.value)">
   <div class="row">
@@ -21,17 +21,12 @@
       <label> Category </label>
       <select
         class="form-control"
-        [(ngModel)]="article.categoryMaskId"
-        name="categoryMaskId"
-        id="categoryMaskId"
+        [(ngModel)]="article.categoryId"
+        name="categoryId"
+        id="categoryId"
       >
-        <option
-          value="00000000-0000-0000-0000-000000000000"
-          [selected]="!article.categoryMaskId"
-        >
-          All
-        </option>
-        <option *ngFor="let category of categories" [value]="category.maskId">
+        <option value="">None</option>
+        <option *ngFor="let category of categories" [value]="category.id">
           {{ category.name }}
         </option>
       </select>

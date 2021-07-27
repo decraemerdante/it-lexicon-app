@@ -32,9 +32,9 @@
     <a
       *ngFor="let article of filteredArticles"
       class="btn btn-category"
-      [ngClass]="getActiveClass(article.maskId)"
+      [ngClass]="getActiveClass(article.id)"
       [id]="article.maskId"
-      (click)="handleClick(article.maskId)"
+      (click)="handleClick(article.id)"
     >
       {{ article.title }}
     </a>

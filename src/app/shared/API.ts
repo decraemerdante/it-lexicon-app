@@ -173,11 +173,9 @@ export class ArticleClient {
         return _observableOf<FileResponse | null>(<any>null);
     }
 
-    delete(maskId: string | undefined): Observable<FileResponse | null> {
+    delete(maskId: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/api/Article?";
-        if (maskId === null)
-            throw new Error("The parameter 'maskId' cannot be null.");
-        else if (maskId !== undefined)
+        if (maskId !== undefined && maskId !== null)
             url_ += "maskId=" + encodeURIComponent("" + maskId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -223,7 +221,7 @@ export class ArticleClient {
         return _observableOf<FileResponse | null>(<any>null);
     }
 
-    get(maskId: string): Observable<ArticleDto> {
+    get(maskId: string | null): Observable<ArticleDto> {
         let url_ = this.baseUrl + "/api/Article/{maskId}";
         if (maskId === undefined || maskId === null)
             throw new Error("The parameter 'maskId' must be defined.");
@@ -273,7 +271,7 @@ export class ArticleClient {
         return _observableOf<ArticleDto>(<any>null);
     }
 
-    getByCategory(maskId: string): Observable<ArticleDto[]> {
+    getByCategory(maskId: string | null): Observable<ArticleDto[]> {
         let url_ = this.baseUrl + "/api/Article/Category/{maskId}";
         if (maskId === undefined || maskId === null)
             throw new Error("The parameter 'maskId' must be defined.");
@@ -482,11 +480,9 @@ export class CategoryClient {
         return _observableOf<FileResponse | null>(<any>null);
     }
 
-    delete(maskId: string | undefined): Observable<FileResponse | null> {
+    delete(maskId: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/api/Category?";
-        if (maskId === null)
-            throw new Error("The parameter 'maskId' cannot be null.");
-        else if (maskId !== undefined)
+        if (maskId !== undefined && maskId !== null)
             url_ += "maskId=" + encodeURIComponent("" + maskId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -532,7 +528,7 @@ export class CategoryClient {
         return _observableOf<FileResponse | null>(<any>null);
     }
 
-    get(maskId: string): Observable<CategoryDto> {
+    get(maskId: string | null): Observable<CategoryDto> {
         let url_ = this.baseUrl + "/api/Category/{maskId}";
         if (maskId === undefined || maskId === null)
             throw new Error("The parameter 'maskId' must be defined.");
@@ -594,7 +590,7 @@ export class LinkedClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
     }
 
-    getLinkedArticles(maskId: string): Observable<ArticleDto[]> {
+    getLinkedArticles(maskId: string | null): Observable<ArticleDto[]> {
         let url_ = this.baseUrl + "/api/Linked/{maskId}";
         if (maskId === undefined || maskId === null)
             throw new Error("The parameter 'maskId' must be defined.");
@@ -745,7 +741,7 @@ export class LinkedClient {
         return _observableOf<FileResponse | null>(<any>null);
     }
 
-    getLinkedArticlesOverview(maskId: string): Observable<LinkedArticleOverviewDto> {
+    getLinkedArticlesOverview(maskId: string | null): Observable<LinkedArticleOverviewDto> {
         let url_ = this.baseUrl + "/api/Linked/Overview/{maskId}";
         if (maskId === undefined || maskId === null)
             throw new Error("The parameter 'maskId' must be defined.");
@@ -797,39 +793,26 @@ export class LinkedClient {
 }
 
 export interface ArticleDto {
-    title: string | undefined;
-    content: string | undefined;
-    maskId: string;
-    categoryId: number | undefined;
-    categoryMaskId: string | undefined;
-    changeLogs: ChangeLogDto[] | undefined;
-}
-
-export interface ChangeLogDto {
-    type: LogItemEnum;
-    date: Date;
-}
-
-export enum LogItemEnum {
-    CREATED = 0,
-    UPDATED = 1,
+    title?: string | undefined;
+    content?: string | undefined;
+    id?: string | undefined;
+    categoryId?: string | undefined;
 }
 
 export interface CategoryDto {
-    name: string | undefined;
-    maskId: string;
-    articles: ArticleDto[] | undefined;
+    name?: string | undefined;
+    id?: string | undefined;
 }
 
 export interface LinkedArticlesDto {
-    articleId: string;
-    linkedArticleId: string;
+    articleId?: string | undefined;
+    linkedArticleId?: string | undefined;
 }
 
 export interface LinkedArticleOverviewDto {
-    mainArticle: ArticleDto | undefined;
-    linkedArticles: ArticleDto[] | undefined;
-    allArticles: ArticleDto[] | undefined;
+    mainArticle?: ArticleDto | undefined;
+    linkedArticles?: ArticleDto[] | undefined;
+    allArticles?: ArticleDto[] | undefined;
 }
 
 export interface FileResponse {

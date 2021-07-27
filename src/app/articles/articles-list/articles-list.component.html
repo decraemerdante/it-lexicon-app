@@ -17,7 +17,7 @@
   <button
     *ngFor="let category of categories"
     class="btn btn-category"
-    [id]="category.maskId"
+    [id]="category.id"
     (click)="handleCatClick($event)"
   >
     {{ category.name }}
@@ -59,11 +59,11 @@
     <tbody>
       <tr *ngFor="let article of articles">
         <td>
-          <a [routerLink]="['/article', article.maskId]">{{ article.title }}</a>
+          <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
         </td>
         <td class="article-actions">
           <a
-            [routerLink]="['/article/delete', article.maskId]"
+            [routerLink]="['/article/delete', article.id]"
             [id]="article.maskId"
           >
             <span
@@ -71,7 +71,7 @@
               [id]="article.maskId"
             ></span
           ></a>
-          <a [routerLink]="['/article/edit', article.maskId]"
+          <a [routerLink]="['/article/edit', article.id]"
             ><span class="bi bi-pencil-fill action-icon pull-right"></span
           ></a>
         </td>
