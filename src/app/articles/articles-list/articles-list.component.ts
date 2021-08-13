@@ -15,6 +15,8 @@ export class ArticlesListComponent implements OnInit {
   articles: ArticleDto[];
   allArticles: ArticleDto[];
   searchTerm: string;
+  p: number = 1;
+  total: number = 0;
   constructor(
     private api: APIService,
     private spinner: NgxSpinnerService,

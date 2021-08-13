@@ -11,6 +11,10 @@ body {
   background-color: #ededed;
 }
 
+
+.ngx-pagination .current{
+  background: var(--pink) !important;
+}
 .action-icon {
   color: var(--pink) !important;
 }

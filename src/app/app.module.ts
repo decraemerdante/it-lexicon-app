@@ -31,6 +31,7 @@ import { CategoryDeleteComponent } from './category/category-delete/category-del
 import { LinkedArticlesEditComponent } from './articles/linked-articles-edit/linked-articles-edit.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     AngularEditorModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [ArticleClient, CategoryClient, HttpClient, APIService],
   bootstrap: [AppComponent],
