@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
+    "\\dist",
     "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\app.component.ts",
+  "SelectedNode": "\\dist\\styles.e6f965cc1c5f6f53a4b7.css",
   "PreviewInSolutionExplorer": false
 }

@@ -1,4 +1,4 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/caeda001-0126-43c4-b013-ce3f24544861/resourceGroups/ITLexicon/providers/Microsoft.Web/sites/it-lexicon-app",
-    "appService.deploySubpath": "dist"
+    "appService.deploySubpath": "dist",
+    "appService.defaultWebAppToDeploy": "/subscriptions/caeda001-0126-43c4-b013-ce3f24544861/resourceGroups/ITLexicon/providers/Microsoft.Web/sites/it-lexicon-app"
 }
